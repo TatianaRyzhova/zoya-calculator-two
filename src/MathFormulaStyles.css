@@ -1,0 +1,32 @@
+/* Custom styles to align KaTeX math formulas to the left */
+.katex, .katex-display {
+    text-align: left !important;   /* Align all math formulas to the left */
+    display: block !important;     /* Make sure it's block-level (important for block math) */
+    font-family: Arial, sans-serif !important; /* Set font to Arial */
+  font-size: 16px !important; 
+  }
+
+  /* Default styling */
+.formula-container {
+    display: inline-block; /* Inline by default */
+    white-space: nowrap;   /* Prevents line breaks */
+  }
+  
+  /* On smaller screens, force the formula to break into a new line */
+  @media (max-width: 600px) {
+    .formula-container {
+      display: block; /* Forces formula to break into a new line */
+      white-space: normal; /* Allows wrapping of the formula */
+      margin-bottom: 10px; /* Adds space between formulas */
+    }
+  }
+
+  @media (max-width: 800px) {
+    .formula-container {
+      display: block;
+      white-space: normal;
+      margin-bottom: 10px;
+    }
+  }
+  
+  
