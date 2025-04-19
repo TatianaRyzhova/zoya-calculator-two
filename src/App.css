@@ -37,6 +37,7 @@ select, input {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 .calculate-button {
@@ -87,12 +88,12 @@ form {
   margin: auto;
 }
 
-input {
+/* input {
   max-width: 120px;
   height: 30px;
   font-size: 15px;
   padding-left: 10px;
-}
+} */
 
 .title {
   font-size: 30px;
@@ -186,14 +187,14 @@ tr:hover {
   margin-top: 4px;
 }
 
-.input-field {
+/* .input-field {
   width: 100%;
   padding: 8px;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
-}
+} */
 
 @media screen and (max-width: 900px) {
   .container {
@@ -232,11 +233,11 @@ tr:hover {
     max-width: 700px;
   }
 
-  input {
+  /* input {
     max-width: 80px;
     height: 35px;
     padding-left: 8px;
-  }
+  } */
 
   .title {
     font-size: 28px;
@@ -253,11 +254,11 @@ tr:hover {
     max-width: 320px;
   }
 
-  input {
+  /* input {
     max-width: 80px;
     height: 35px;
     padding-left: 8px;
-  }
+  } */
 
   .tables {
     display: flex;
