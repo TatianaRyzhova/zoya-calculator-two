@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import './App.css';
-import ProbabilityFormula from './mathFormula';
-import Accordion from './components/Accordion';
 
 function App() {
-  const [number, setNumber] = useState({
-      one: '',
-      two: '',
-      three: '',
-      four: '',
-      five: '',
+  const [values, setValues] = useState({
+    one: 0,
+    two: 0,
+    three: 0,
+    four: '',
+    five: ''
   });
-
-  const [result, setResult] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const [result, setResult] = useState(null);
+  const [risk, setRisk] = useState('');
 
   const indicators = [
     {
@@ -38,157 +35,86 @@ function App() {
     },
   ];
 
-  function handleChange(event) {
-      const input = event.target;
-      const name = input.name;
-      const value = input.value;
-      setNumber({
-        ...number,
-        [name]: value
-      });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+  };
+
+  const calculate = () => {
+    if (values.four === '' || values.five === '') {
+      alert('Пожалуйста, заполните все обязательные поля.');
+      return;
     }
 
-    function handleSubmit(event) {
-      event.preventDefault();
-      setSubmitted(true);
+    const z = 13.730 + 0.126 * values.one + 0.772 * values.two - 1.785 * values.three + 0.363 * values.four - 0.571 * values.five;
+    const P = (1 / (1 + Math.exp(-z))) * 100;
+    setResult(P.toFixed(2));
+    setRisk(P > 52.0 ? 'Высокий риск' : 'Низкий риск');
+  };
 
-      const one = 0.126 * Number(number.one);
-      const two = 0.772 * Number(number.two);
-      const three = 1.785 * Number(number.three);
-      const four = 0.363 * Number(number.four);
-      const five = 0.571 * Number(number.five);
-
-      const z = 13.730 + one + two - three + four - five;
-      const P = (1 / (1 + Math.exp(-z))) * 100;
-      setResult(P);
-
-      // setSubmitted(false);
-    }
-
-  
   return (
-      <div className="container">
-          <h1 className='title'>Прогнозирование во втором триместре беременности поздних преждевременных спонтанных родов </h1>
-          <p style={{ fontWeight: "bold" }}>Формула:</p>
-          {/* <p>Р = (1 / (1 + е<sup>-z</sup>)) x 100%</p> */}
-          {/* <p>z = (-3,601) + (1,044 × Показатель1) + (1,502 × Показатель2) + (0,581 × Показатель3) + (0,217 × Показатель4)</p> */}
-          <ProbabilityFormula />
-          <p>где:</p>
-          <p>z = 13,730 + (0,126 × Показатель1) + (0,772 × Показатель2) - (1,785 × Показатель3) + (0,363 × Показатель4) - (0,571 × Показатель5)</p>
-          {/* <ul>
-            <li>Показатель1 – Отягощенный акушерско-гинекологический анамнез (преждевременные роды в анамнезе, поздний выкидыш в анамнезе)</li>
-            <li>Показатель2 – Дефект шейки матки (истмико-цервикальная недостаточность в предыдущую беременность, разрыв шейки матки в анамнезе, два и более инструментальных расширения цервикального канала в анамнезе, конизация или расширенная эксцизия шейки матки в анамнезе, лазерная вапоризация шейки матки в анамнезе)</li>
-            <li>Показатель3 – Инфекционно-воспалительные заболевания и дисбиотические состояния при настоящей беременности (рецидивирующий бактериальный вагиноз, острый вагинит, цервицит, инфекции мочевыводящих путей, бессимптомная бактериурия)</li>
-            <li>Показатель4 – Количество лейкоцитов в микроскопическом исследовании отделяемого из цервикального канала в I–II триместре настоящей беременности (количество клеток. в поле зрения)</li>
-            <li>Показатель5 – Длина шейки матки на втором ультразвуковом скрининге в 18<sup>0</sup>–20<sup>6</sup> недель (миллиметры)</li>
-          </ul> */}
+    <div className="container">
+      <h1 className='title'>Прогнозирование во втором триместре беременности поздних преждевременных спонтанных родов </h1>
+    
 
-          <div className="accordion-container">
-            {indicators.map((indicator, index) => (
-              <Accordion key={index} title={indicator.title} content={<p>{indicator.description}</p>} />
-            ))}
-          </div>
-
-          <p style={{ fontWeight: "bold", paddingTop: "16px" }}>Интерпретация:</p>
-          <p>0,520 и выше — Высокий риск</p>
-          <p>ниже 0,520 — Низкий риск </p>
-
-          <form onSubmit={handleSubmit}>
-              <div className="tables">
-                  <table>
-                      <tbody>
-                          <tr>
-                              <th style={{width: "220px"}}>Показатель1
-                                <div style={{ fontSize: "12px", color: "rgba(0, 0, 0, 0.4)" }}>0 - Нет, 1 - Да</div>
-                              </th>
-                              <th>
-                                  <input
-                                      type="number"
-                                      placeholder="0 или 1"
-                                      name="one"
-                                      onChange={handleChange}
-                                      value={number.one}
-                                      submitted={submitted}
-                                      required
-                                  />
-                              </th>
-                          </tr>
-                          <tr>
-                              <th style={{width: "220px"}}>Показатель2
-                                <div style={{ fontSize: "12px", color: "rgba(0, 0, 0, 0.4)" }}>0 - Нет, 1 - Да</div>
-                              </th>
-                              <th>
-                                  <input
-                                      type="number"
-                                      placeholder="0 или 1"
-                                      name="two"
-                                      onChange={handleChange}
-                                      value={number.two}
-                                      submitted={submitted}
-                                      required
-                                  />
-                              </th>
-                          </tr>
-                          <tr>
-                              <th style={{width: "220px"}}>Показатель3
-                                <div style={{ fontSize: "12px", color: "rgba(0, 0, 0, 0.4)" }}>0 - Нет, 1 - Да</div>
-                              </th>
-                              <th>
-                                  <input
-                                      type="number"
-                                      placeholder="0 или 1"
-                                      name="three"
-                                      onChange={handleChange}
-                                      value={number.three}
-                                      submitted={submitted}
-                                      required
-                                  />
-                              </th>
-                          </tr>
-                          <tr>
-                              <th style={{width: "220px"}}>Показатель4</th>
-                              <th>
-                                  <input
-                                      type="number"
-                                      // placeholder="0 или 1"
-                                      name="four"
-                                      onChange={handleChange}
-                                      value={number.four}
-                                      submitted={submitted}
-                                      required
-                                  />
-                              </th>
-                          </tr>
-                          <tr>
-                              <th style={{width: "220px"}}>Показатель5</th>
-                              <th>
-                                  <input
-                                      type="number"
-                                      // placeholder="0 или 1"
-                                      name="five"
-                                      onChange={handleChange}
-                                      value={number.five}
-                                      submitted={submitted}
-                                      required
-                                  />
-                              </th>
-                          </tr>
-                      </tbody>   
-                  </table>
-              </div>
-              <button type="submit">РАССЧИТАТЬ</button>
-          </form>
-          <div className="result-space" style={{ minHeight: '50px', paddingBottom: '30px' }}>
-              {submitted && (
-                  <div className="result">
-                  Результат:
-                  <span className={result > 0.520 ? 'result-red' : 'result-green'}> {result}</span>
-                  <p className="information">{'Р > 0,520 - высокий риск'}</p>
-                  <p className="information">{'Р < 0,520 - низкий риск'}</p>
-              </div>
-              )}
-          </div>
+      <div className="form-group">
+        <label>
+          Отягощенный акушерско-гинекологический анамнез
+          <span className="description">(преждевременные роды в анамнезе, поздний выкидыш в анамнезе)</span>
+        </label>
+        <select name="one" value={values.one} onChange={handleChange}>
+          <option value={0}>Нет</option>
+          <option value={1}>Да</option>
+        </select>
       </div>
+
+      <div className="form-group">
+        <label>
+          Дефект шейки матки
+          <span className="description">(истмико-цервикальная недостаточность в предыдущую беременность, разрыв шейки матки в анамнезе, два и более инструментальных расширения цервикального канала в анамнезе, конизация или расширенная эксцизия шейки матки в анамнезе, лазерная вапоризация шейки матки в анамнезе)</span>
+        </label>
+        <select name="two" value={values.two} onChange={handleChange}>
+          <option value={0}>Нет</option>
+          <option value={1}>Да</option>
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label>
+          Инфекционно-воспалительные заболевания и дисбиотические состояния при настоящей беременности
+          <span className="description">(рецидивирующий бактериальный вагиноз, острый вагинит, цервицит, инфекции мочевыводящих путей, бессимптомная бактериурия)</span>
+        </label>
+        <select name="three" value={values.three} onChange={handleChange}>
+          <option value={0}>Нет</option>
+          <option value={1}>Да</option>
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label>
+          Количество лейкоцитов в микроскопическом исследовании отделяемого из цервикального канала в I–II триместре настоящей беременности
+          <span className="description">(количество клеток в поле зрения)</span>
+        </label>
+        <input type="number" name="four" value={values.four} onChange={handleChange} className="input-field" required/>
+      </div>
+
+      <div className="form-group">
+        <label>
+          Длина шейки матки на втором ультразвуковом скрининге в 18<sup>0</sup>–20<sup>6</sup> недель
+          <span className="description">(миллиметры)</span>
+        </label>
+        <input type="number" name="five" value={values.five} onChange={handleChange} className="input-field" required/>
+      </div>
+
+      <button className="calculate-button" onClick={calculate}>Рассчитать</button>
+
+      {result && (
+        <div className="result">
+          <p>Вероятность: <strong>{result}%</strong></p>
+          <p>Результат: <strong>{risk}</strong></p>
+        </div>
+      )}
+    </div>
   );
 }
 

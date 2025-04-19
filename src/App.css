@@ -1,9 +1,70 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
 .container {
-  font-family: Arial, Helvetica, sans-serif;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 20px;
   text-align: center;
-  margin: auto;
-  justify-content: center;
-  max-width: 1024px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+select, input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.calculate-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.calculate-button:hover {
+  background-color: #218838;
+}
+
+.result {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  text-align: center; /* Center-align text */
+}
+
+.result p {
+  margin: 5px 0;
+  font-size: 16px;
 }
 
 p {
@@ -33,14 +94,6 @@ input {
   padding-left: 10px;
 }
 
-label {
-  font-size: 20px;
-  font-weight: 900;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  text-align: left;
-}
-
 .title {
   font-size: 30px;
 }
@@ -59,15 +112,6 @@ button {
 
 button:hover {
   opacity: 0.8;
-}
-
-.result {
-  max-width: 1024px;;
-  margin: auto;
-  text-align: left;
-  font-size: 25px;
-  font-weight: 900;
-  /* padding-bottom: 50px; */
 }
 
 .result-red {
@@ -135,6 +179,21 @@ tr:hover {
   margin-bottom: 0;
 }
 
+.description {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
 
 @media screen and (max-width: 900px) {
   .container {
