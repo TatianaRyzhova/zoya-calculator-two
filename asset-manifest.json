@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/zoya-calculator-two/static/css/main.969cc68f.css",
-    "main.js": "/zoya-calculator-two/static/js/main.4303fe20.js",
+    "main.js": "/zoya-calculator-two/static/js/main.2402cc7c.js",
     "static/js/453.bdd5dd16.chunk.js": "/zoya-calculator-two/static/js/453.bdd5dd16.chunk.js",
     "index.html": "/zoya-calculator-two/index.html",
     "main.969cc68f.css.map": "/zoya-calculator-two/static/css/main.969cc68f.css.map",
-    "main.4303fe20.js.map": "/zoya-calculator-two/static/js/main.4303fe20.js.map",
+    "main.2402cc7c.js.map": "/zoya-calculator-two/static/js/main.2402cc7c.js.map",
     "453.bdd5dd16.chunk.js.map": "/zoya-calculator-two/static/js/453.bdd5dd16.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.969cc68f.css",
-    "static/js/main.4303fe20.js"
+    "static/js/main.2402cc7c.js"
   ]
 }
