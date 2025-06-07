@@ -6,8 +6,7 @@ function App() {
     one: 0,
     two: 0,
     three: 0,
-    four: '',
-    five: ''
+    four: ''
   });
   const [result, setResult] = useState(null);
   const [risk, setRisk] = useState('');
@@ -18,15 +17,15 @@ function App() {
   };
 
   const calculate = () => {
-    if (values.four === '' || values.five === '') {
+    if (values.four === '') {
       alert('Пожалуйста, заполните все обязательные поля.');
       return;
     }
 
-    const z = 13.730 + 0.126 * values.one + 0.772 * values.two - 1.785 * values.three + 0.363 * values.four - 0.571 * values.five;
+    const z = 12.135 + 0.008 * values.one - 0.432 * values.two + 3.385 * values.three + 1.104 * values.four;
     const P = (1 / (1 + Math.exp(-z))) * 100;
     setResult(P.toFixed(2));
-    setRisk(P > 52.0 ? 'Высокий риск' : 'Низкий риск');
+    setRisk(P > 50.9 ? 'Высокий риск' : 'Низкий риск');
   };
 
   return (
@@ -47,8 +46,8 @@ function App() {
 
       <div className="form-group">
         <label>
-          Дефект шейки матки
-          <span className="description">(истмико-цервикальная недостаточность в предыдущую беременность, разрыв шейки матки в анамнезе, два и более инструментальных расширения цервикального канала в анамнезе, конизация или расширенная эксцизия шейки матки в анамнезе, лазерная вапоризация шейки матки в анамнезе)</span>
+        Длина шейки матки на втором ультразвуковом скрининге в 18<sup>0</sup>–20<sup>6</sup> недель (миллиметры)
+          {/* <span className="description">(истмико-цервикальная недостаточность в предыдущую беременность, разрыв шейки матки в анамнезе, два и более инструментальных расширения цервикального канала в анамнезе, конизация или расширенная эксцизия шейки матки в анамнезе, лазерная вапоризация шейки матки в анамнезе)</span> */}
         </label>
         <select name="two" value={values.two} onChange={handleChange}>
           <option value={0}>Нет</option>
@@ -69,18 +68,10 @@ function App() {
 
       <div className="form-group">
         <label>
-          Количество лейкоцитов в микроскопическом исследовании отделяемого из цервикального канала в I–II триместре настоящей беременности
-          <span className="description">(количество клеток в поле зрения)</span>
+          Дефект шейки матки
+          <span className="description">(истмико-цервикальная недостаточность в предыдущую беременность, разрыв шейки матки в анамнезе, два и более инструментальных расширения цервикального канала в анамнезе, конизация или расширенная эксцизия шейки матки в анамнезе, лазерная вапоризация шейки матки в анамнезе)</span>
         </label>
         <input type="number" name="four" value={values.four} onChange={handleChange} className="input-field" required/>
-      </div>
-
-      <div className="form-group">
-        <label>
-          Длина шейки матки на втором ультразвуковом скрининге в 18<sup>0</sup>–20<sup>6</sup> недель
-          <span className="description">(миллиметры)</span>
-        </label>
-        <input type="number" name="five" value={values.five} onChange={handleChange} className="input-field" required/>
       </div>
 
       <button className="calculate-button" onClick={calculate}>Рассчитать</button>
